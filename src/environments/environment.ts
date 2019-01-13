@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:8081',
-  loginClientId: "browser",
-  loginClientSecret: "secret",
-  adminClientId: "admin",
+  loginClientId: 'browser',
+  loginClientSecret: 'secret',
+  adminClientId: 'admin',
 };

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 import UIkit from 'uikit';
 
@@ -10,10 +10,10 @@ export class AlertService {
     }
 
     setAlert(type, message) {
-        UIkit.notification(message, {status:type, pos: 'bottom-right'})
+        UIkit.notification(message, {status: type, pos: 'bottom-right'});
     }
 
     closeAll() {
-        UIkit.notification.closeAll()
+        UIkit.notification.closeAll();
     }
 }

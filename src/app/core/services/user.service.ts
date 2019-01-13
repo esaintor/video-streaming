@@ -62,11 +62,11 @@ export class UserService {
   attemptAuth(type, credentials): Observable<any> {
     const route = (type === 'login') ? '/login' : '';
     let headers = new HttpHeaders();
-    headers = headers.set("Content-Type", "application/json");
-    headers = headers.set("Authorization", "Basic " + btoa("admin:secret"));
-    credentials.grant_type = "password";
-    const path = "http://localhost:8081/oauth/token"; 
-    return  this.http.post(path, {}, {headers:  headers, params: credentials}).pipe(map(data=>{
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', 'Basic ' + btoa('admin:secret'));
+    credentials.grant_type = 'password';
+    const path = 'http://localhost:8081/oauth/token';
+    return  this.http.post(path, {}, {headers:  headers, params: credentials}).pipe(map(data => {
       this.jwtService.saveToken(data['access_token']);
       this.populate();
       return data;

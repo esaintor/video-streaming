@@ -10,7 +10,7 @@ import { LocationStrategy } from '@angular/common';
 export class ContentComponent implements OnInit {
   constructor(
     private router: Router
-  ) { 
+  ) {
   }
 
   ngOnInit() {

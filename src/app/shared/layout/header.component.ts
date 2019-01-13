@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
   errors: Errors = {errors: {}};
   isSubmitting = false;
   authForm: FormGroup;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private alertService : AlertService,
+    private alertService: AlertService,
     private userService: UserService,
     private fb: FormBuilder
   ) {}
@@ -50,9 +50,9 @@ export class HeaderComponent implements OnInit {
     .attemptAuth(this.authType, credentials)
     .subscribe(
       data => {
-        UIkit.modal(document.getElementById("login-modal")).hide();
+        UIkit.modal(document.getElementById('login-modal')).hide();
         this.alertService.setAlert('success', 'Тавтай морил');
-      }, 
+      },
       err => {
         this.errors = err;
         this.isSubmitting = false;

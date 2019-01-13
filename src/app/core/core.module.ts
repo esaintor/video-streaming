@@ -29,7 +29,7 @@ import {
     JwtService,
     ProfilesService,
     TagsService,
-    UserService, 
+    UserService,
     AlertService,
     LoaderService
   ],

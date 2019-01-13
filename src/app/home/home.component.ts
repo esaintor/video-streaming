@@ -40,6 +40,6 @@ export class HomeComponent implements OnInit {
 
 
   toWatch() {
-    this.router.navigateByUrl("content");
+    this.router.navigateByUrl('content');
   }
 }

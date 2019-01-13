@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   currentUser: User;
   isUser: boolean;
 
-  userForm : FormGroup;
+  userForm: FormGroup;
 
   ngOnInit() {
     this.userForm = this.fb.group({
