@@ -30,28 +30,16 @@ export class HomeComponent implements OnInit {
 
         // set the article list accordingly
         if (authenticated) {
-          this.setListTo('feed');
+          // this.setListTo('feed');
         } else {
-          this.setListTo('all');
+          // this.setListTo('all');
         }
       }
     );
-
-    this.tagsService.getAll()
-    .subscribe(tags => {
-      this.tags = tags;
-      this.tagsLoaded = true;
-    });
   }
 
-  setListTo(type: string = '', filters: Object = {}) {
-    // If feed is requested but user is not authenticated, redirect to login
-    if (type === 'feed' && !this.isAuthenticated) {
-      this.router.navigateByUrl('/login');
-      return;
-    }
 
-    // Otherwise, set the list object
-    this.listConfig = {type: type, filters: filters};
+  toWatch() {
+    this.router.navigateByUrl("content");
   }
 }

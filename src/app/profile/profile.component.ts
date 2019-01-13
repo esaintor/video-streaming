@@ -3,34 +3,38 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User, UserService, Profile } from '../core';
 import { concatMap ,  tap } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-page',
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private fb: FormBuilder
   ) { }
 
   profile: Profile;
   currentUser: User;
   isUser: boolean;
 
+  userForm : FormGroup;
+
   ngOnInit() {
-    this.route.data.pipe(
-      concatMap((data: { profile: Profile }) => {
-        this.profile = data.profile;
-        // Load the current user's data.
-        return this.userService.currentUser.pipe(tap(
-          (userData: User) => {
-            this.currentUser = userData;
-            this.isUser = (this.currentUser.username === this.profile.username);
-          }
-        ));
-      })
-    ).subscribe();
+    this.userForm = this.fb.group({
+      'username': ['', Validators.required],
+      'email': ['', [Validators.required, Validators.email]]
+    });
+    this.userService.currentUser.subscribe(
+      (userData) => {
+        this.currentUser = userData;
+        this.userForm.controls['username'].setValue(userData.username);
+        this.userForm.controls['email'].setValue(userData.email);
+      }
+    );
   }
 
   onToggleFollowing(following: boolean) {

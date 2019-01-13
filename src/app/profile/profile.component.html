@@ -1,58 +1,19 @@
-<div class="profile-page">
-
-  <div class="user-info">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.image" class="user-img" />
-          <h4>{{ profile.username }}</h4>
-          <p>{{ profile.bio }}</p>
-          <app-follow-button
-            [hidden]="isUser"
-            [profile]="profile"
-            (toggle)="onToggleFollowing($event)">
-          </app-follow-button>
-           <a [routerLink]="['/settings']"
-              [hidden]="!isUser"
-              class="btn btn-sm btn-outline-secondary action-btn">
-              <i class="ion-gear-a"></i> Edit Profile Settings
-            </a>
+<div class="uk-container uk-background-secondary" *ngIf="userForm">
+    <form class="uk-form-horizontal uk-margin-large" [formGroup]="userForm">
+        <legend class="uk-legend">Хувийн мэдээлэл</legend>
+        <div class="uk-margin">
+            <label class="uk-form-label">Хэрэглэгчийн нэр</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="" formControlName="username">
+            </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-
-      <div class="col-xs-12 col-md-10 offset-md-1">
-        <div class="articles-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['/profile', profile.username]">
-                 My Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['/profile', profile.username, 'favorites']">
-                 Favorited Posts
-              </a>
-            </li>
-          </ul>
+    
+        <div class="uk-margin">
+            <label class="uk-form-label">Цахим хаяг</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder=""  formControlName="email">
+            </div>
         </div>
-
-        <router-outlet></router-outlet>
-      </div>
-
-    </div>
-  </div>
-
+    
+    </form>
 </div>

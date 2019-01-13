@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
+import { AlertService } from './alert.service';
 
 
 @Injectable()
@@ -18,6 +19,7 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
+    private alertService: AlertService,
     private http: HttpClient,
     private jwtService: JwtService
   ) {}
@@ -27,9 +29,9 @@ export class UserService {
   populate() {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
-      this.apiService.get('/user')
+      this.apiService.get('/api/me')
       .subscribe(
-        data => this.setAuth(data.user),
+        data => this.setAuth(data),
         err => this.purgeAuth()
       );
     } else {
@@ -54,17 +56,21 @@ export class UserService {
     this.currentUserSubject.next({} as User);
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
+    this.alertService.setAlert('danger', 'Түр баяртай');
   }
 
-  attemptAuth(type, credentials): Observable<User> {
+  attemptAuth(type, credentials): Observable<any> {
     const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post('/users' + route, {user: credentials})
-      .pipe(map(
-      data => {
-        this.setAuth(data.user);
-        return data;
-      }
-    ));
+    let headers = new HttpHeaders();
+    headers = headers.set("Content-Type", "application/json");
+    headers = headers.set("Authorization", "Basic " + btoa("admin:secret"));
+    credentials.grant_type = "password";
+    const path = "http://localhost:8081/oauth/token"; 
+    return  this.http.post(path, {}, {headers:  headers, params: credentials}).pipe(map(data=>{
+      this.jwtService.saveToken(data['access_token']);
+      this.populate();
+      return data;
+    }));
   }
 
   getCurrentUser(): User {

@@ -7,13 +7,13 @@ import { HomeModule } from './home/home.module';
 import {
   FooterComponent,
   HeaderComponent,
-  SharedModule
+  SharedModule,LoaderComponent
 } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent],
+  declarations: [AppComponent, FooterComponent, HeaderComponent, LoaderComponent],
   imports: [
     BrowserModule,
     CoreModule,

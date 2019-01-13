@@ -9,13 +9,24 @@ import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  // suppressScrollX: true
+  suppressScrollX: false,
+  suppressScrollY: false
+};
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    PerfectScrollbarModule
   ],
   declarations: [
     ArticleListComponent,
@@ -38,7 +49,14 @@ import { ShowAuthedDirective } from './show-authed.directive';
     HttpClientModule,
     ListErrorsComponent,
     RouterModule,
-    ShowAuthedDirective
+    ShowAuthedDirective,
+    PerfectScrollbarModule
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class SharedModule {}

@@ -1,1 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
+
+.saga-color-white {
+    color: white;
+}
+
+.saga-margin-16px {
+    margin: 16px;
+}
+
+.saga-padding-16px {
+    padding: 16px;
+}
+
+.saga-scrolling-wrapper {
+    /* overflow-x: scroll; */
+    overflow-y: hidden;
+    white-space: nowrap;
+    /* -webkit-overflow-scrolling: touch; */
+}
+
+.saga-scrolling-wrapper .saga-card {
+    display: inline-block;
+    margin: 12px;
+    cursor: pointer;
+    position: relative;
+    width: 320px;
+}
+
+.saga-card-background {
+    width: 100%;
+    height: 100%;
+    POSITION: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.saga-card:hover .saga-card-background{
+    background: rgba(255,255,255,.4);
+    color: black;
+}
+
+.saga-mobile-hide {
+    display: block !important;
+}
+
+.saga-overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+    .saga-mobile-hide {
+        display: none !important;
+    }
+}
+
+.saga-player {
+    height: 100% !important;
+}
+
+.saga-player-control-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.saga-player-timer {
+    font-size: 32px;
+    padding: 16px;
+    right: 0;
+    color: white;
+    float: right;
+}
+
+.saga-gradient-header {
+    height: 20%;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+}
+
+.saga-gradient-header i {
+    cursor: pointer;
+}
+
+.saga-gradient-body {
+    height: 60%;
+    cursor: pointer;
+    background: rgba(0,0,0,0.3);
+}
+
+.saga-gradient-footer {
+    height: 20%;
+    cursor: pointer;
+    background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+}
+
+.saga-player-seek {
+    width: 96%;
+    margin: auto;
+    text-align: center;
+    height: 4px;
+    background: rgba(255,255,255,0.5);
+}
+
+.saga-player-progress {
+    width: 10%;
+    height: 4px;
+    background: #d80e00;
+}
+
+.saga-player-controls {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}

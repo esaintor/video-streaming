@@ -1,75 +1,74 @@
-<nav class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">conduit</a>
-
-    <!-- Show this for logged out users -->
-    <ul *appShowAuthed="false"
-      class="nav navbar-nav pull-xs-right">
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/">
-          Home
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/login"
-          routerLinkActive="active">
-          Sign in
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/register"
-          routerLinkActive="active">
-          Sign up
-        </a>
-      </li>
-
+<nav class="uk-background-secondary uk-margin" uk-navbar="mode:click;">
+  <div class="nav-overlay uk-navbar-left">
+    <a class="uk-navbar-item uk-logo" href="#">LG</a>
+    <ul class="uk-navbar-nav">
+      <li><a href="#">Кино</a></li>
+      <li><a href="#">ТВ Цуврал</a></li>
+      <li class="saga-mobile-hide"><a href="#">DC</a></li>
+      <li class="saga-mobile-hide"><a href="#">Marvel</a></li>
     </ul>
-
-    <!-- Show this for logged in users -->
-    <ul *appShowAuthed="true"
-      class="nav navbar-nav pull-xs-right">
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
-          Home
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/editor"
-          routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;New Article
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/settings"
-          routerLinkActive="active">
-          <i class="ion-gear-a"></i>&nbsp;Settings
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          [routerLink]="['/profile', currentUser.username]"
-          routerLinkActive="active">
-          <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
-          {{ currentUser.username }}
-        </a>
-      </li>
-
-    </ul>
-
   </div>
+  <div class="nav-overlay uk-navbar-right">
+    <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+  </div>
+  <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+    <div class="uk-navbar-item uk-width-expand">
+      <form class="uk-search uk-search-navbar uk-width-1-1">
+        <input class="uk-search-input" type="search" placeholder="Хайх..." autofocus>
+      </form>
+    </div>
+    <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+  </div>
+  <ul class="nav-overlay uk-navbar-nav ">
+    <li *ngIf="!(currentUser && currentUser.username)"><a href="#login-modal" class="uk-text-lowercase" uk-toggle>Нэвтрэх</a></li>
+    <li class="saga-mobile-hide" *ngIf="currentUser && currentUser.username">
+      <a class="uk-text-lowercase" href="#">{{currentUser.username}}</a>
+      <div class="uk-navbar-dropdown">
+        <ul class="uk-nav uk-navbar-dropdown-nav">
+          <li class="uk-nav-header">Миний дуртай</li>
+          <li><a href="#">DC</a></li>
+          <li class="uk-nav-header">Тохиргоо</li>
+          <li><a href="/profile">Хувийн мэдээлэл</a></li>
+          <li><a href="#">Төлбөрийн мэдээлэл</a></li>
+          <li class="uk-nav-divider"></li>
+          <li><a (click)="logout()">Системээс гарах</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </nav>
+
+<div id="login-modal" uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">Нэвтрэх</h2>
+    </div>
+    <div class="uk-modal-body">
+      <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <fieldset class="uk-fieldset">
+          <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+              <a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
+              <input class="uk-input " [ngClass]="{'uk-form-danger':errors.error}" type="text" formControlName="username"
+                placeholder="Хэрэглэгчийн нэр">
+            </div>
+          </div>
+          <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+              <a class="uk-form-icon" href="#" uk-icon="icon: lock"></a>
+              <input class="uk-input" [ngClass]="{'uk-form-danger':errors.error}" type="password" formControlName="password"
+                placeholder="Нууц үг">
+            </div>
+          </div>
+          <div *ngIf="errors.error" class="uk-text-danger">
+            <span *ngIf="errors.error.error==='invalid_grant'">Хэрэглэгчийн нэр эсвэл нууц үг буруу байна</span>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Болих</button>
+      <button class="uk-button uk-button-primary" type="submit" (click)="submitForm()">Нэвтрэх</button>
+    </div>
+  </div>
+</div>

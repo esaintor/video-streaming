@@ -31,29 +31,6 @@ export class FollowButtonComponent {
           this.router.navigateByUrl('/login');
           return of(null);
         }
-
-        // Follow this profile if we aren't already
-        if (!this.profile.following) {
-          return this.profilesService.follow(this.profile.username)
-          .pipe(tap(
-            data => {
-              this.isSubmitting = false;
-              this.toggle.emit(true);
-            },
-            err => this.isSubmitting = false
-          ));
-
-        // Otherwise, unfollow this profile
-        } else {
-          return this.profilesService.unfollow(this.profile.username)
-          .pipe(tap(
-            data => {
-              this.isSubmitting = false;
-              this.toggle.emit(false);
-            },
-            err => this.isSubmitting = false
-          ));
-        }
       }
     )).subscribe();
   }
