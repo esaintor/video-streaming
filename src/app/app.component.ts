@@ -9,7 +9,7 @@ import { UserService, LoaderService } from './core';
 export class AppComponent implements OnInit {
   constructor (
     private userService: UserService,
-    private loader: LoaderService
+    public loader: LoaderService
   ) {}
 
   ngOnInit() {

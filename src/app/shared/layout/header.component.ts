@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
         this.alertService.setAlert('success', 'Тавтай морил');
       },
       err => {
-        this.errors = err;
+        this.errors.errors = err;
         this.isSubmitting = false;
       }
     );

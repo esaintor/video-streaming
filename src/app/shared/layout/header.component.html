@@ -49,19 +49,19 @@
           <div class="uk-margin">
             <div class="uk-inline uk-width-1-1">
               <a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
-              <input class="uk-input " [ngClass]="{'uk-form-danger':errors.error}" type="text" formControlName="username"
+              <input class="uk-input " [ngClass]="{'uk-form-danger':errors.errors.error}" type="text" formControlName="username"
                 placeholder="Хэрэглэгчийн нэр">
             </div>
           </div>
           <div class="uk-margin">
             <div class="uk-inline uk-width-1-1">
               <a class="uk-form-icon" href="#" uk-icon="icon: lock"></a>
-              <input class="uk-input" [ngClass]="{'uk-form-danger':errors.error}" type="password" formControlName="password"
+              <input class="uk-input" [ngClass]="{'uk-form-danger':errors.errors.error}" type="password" formControlName="password"
                 placeholder="Нууц үг">
             </div>
           </div>
-          <div *ngIf="errors.error" class="uk-text-danger">
-            <span *ngIf="errors.error.error==='invalid_grant'">Хэрэглэгчийн нэр эсвэл нууц үг буруу байна</span>
+          <div *ngIf="errors.errors.error" class="uk-text-danger">
+            <span *ngIf="errors.errors.error.error==='invalid_grant'">Хэрэглэгчийн нэр эсвэл нууц үг буруу байна</span>
           </div>
         </fieldset>
       </form>
